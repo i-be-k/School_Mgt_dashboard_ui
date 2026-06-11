@@ -1,4 +1,4 @@
-# Kobi Dev School Management Dashboard
+# Lope Dev School Management Dashboard
 
 ## Getting Started
 
