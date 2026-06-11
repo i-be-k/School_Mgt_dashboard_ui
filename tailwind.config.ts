@@ -13,6 +13,14 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        lopeRose: "#ffa1ad",
+        lopeRoseLight: "#ffccd3",
+        lopeEmerald: "#5ee9b5",
+        lopeEmeraldLight: "#a4f4cf",
+        lopeAmber: "#ffd230",
+        lopeAmberLight: "#fee685",
+      },
     },
   },
   plugins: [],
