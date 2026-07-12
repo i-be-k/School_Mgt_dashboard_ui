@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         lopeSky: "#c3ebfa",
+        lopeSkyLight: "#dff2fe",
         // lopeYellow: "#fae27c",
         lopeRose: "#ffccd3",
         lopeRoseLight: "#fff1f2",
