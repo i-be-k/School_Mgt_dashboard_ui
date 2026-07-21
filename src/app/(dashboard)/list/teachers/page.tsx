@@ -6,7 +6,7 @@ import { Prisma } from "@/generated/prisma/client";
 import { role, teachersData } from "@/lib/data";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Class, Subject, Teacher } from "@prisma/client";
+import { Class, Subject, Teacher } from "@/generated/prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -78,6 +78,8 @@ const TeacherListPage = async ({
 
     const p = page ? parseInt(page) : 1;
 
+    // URL PARAMS CONDITION
+
     const query: Prisma.TeacherWhereInput = {};
 
     if (queryParams) {
@@ -91,8 +93,11 @@ const TeacherListPage = async ({
                             },
                         };
                         break;
-                        case "search":
-                            query.name = {contains:value, mode:"insensitive"}
+                    case "search":
+                        query.name = { contains: value, mode: "insensitive" };
+                        break;
+                    default:
+                        break;
                 }
             }
         }
