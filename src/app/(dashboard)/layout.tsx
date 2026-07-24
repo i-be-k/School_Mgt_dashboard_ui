@@ -1,13 +1,16 @@
 import Menu from "@/components/Menu";
 import Navbar from "@/components/Navbar";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    // Automatically blocks unauthenticated access to /dashboard and all sub-routes
+    await auth.protect();
     return (
         <div className="min-h-screen flex">
             {/* LEFT */}
