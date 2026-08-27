@@ -13,13 +13,21 @@ const StudentPage = async () => {
         },
     });
 
+    const currentClass = classItem[0] ?? null;
+
     return (
         <div className="p-4 flex gap-4 flex-col xl:flex-row">
             {/* LEFT */}
             <div className="w-full xl:w2/3">
                 <div className="h-full bg-white p-4 rounded-md">
-                    <h1 className="text-xl font-semibold">Schedule (4A)</h1>
-                    <BigCalendarContainer type="classId" id={classItem[0].id} />
+                    <h1 className="text-xl font-semibold">
+                        {currentClass ? `Schedule (${currentClass.name})` : "Schedule"}
+                    </h1>
+                    {currentClass ? (
+                        <BigCalendarContainer type="classId" id={currentClass.id} />
+                    ) : (
+                        <p className="text-gray-400 mt-4">No schedule found for your account.</p>
+                    )}
                 </div>
             </div>
             {/* RIGHT */}
