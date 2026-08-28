@@ -22,13 +22,13 @@ const allKnownRoles = Array.from(new Set(Object.values(routeAccessMap).flat()));
 export default clerkMiddleware(async (auth, req) => {
   const currentPath = req.nextUrl.pathname;
 
-  if (currentPath === "/") {
+  // 1. FORCE AN EARLY BYPASS FOR PUBLIC PAGES TO BREAK RUNTIME LOOPS
+  if (currentPath === "/" || currentPath.startsWith("/_next") || currentPath.includes(".")) {
     return NextResponse.next();
   }
   
-  const { sessionClaims } = await auth();
-
   // Safely extract the role from user metadata
+  const { sessionClaims } = await auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   // --- HARD PRIVILEGE ISOLATION GUARD ---
@@ -53,6 +53,11 @@ export default clerkMiddleware(async (auth, req) => {
   if (matchingRule) {
     // Redirect if the role is missing or not authorized for this specific route
     if (!role || !matchingRule.allowedRoles.includes(role)) {
+
+      // REDIRECT TO APPROPRIATE SIGN-IN PAGE
+      if (!role) {
+        return NextResponse.next();
+      }
       const fallbackRedirect = role ? `/${role}` : "/sign-in";
       return NextResponse.redirect(new URL(fallbackRedirect, req.url));
     }
