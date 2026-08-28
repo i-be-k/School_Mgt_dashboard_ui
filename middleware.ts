@@ -1,6 +1,6 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { routeAccessMap } from "./lib/settings";
+import { routeAccessMap } from "./src/lib/settings";
 
 // 1. Transform your settings map into compiled regular expressions once on startup
 const parsedRouteRules = Object.entries(routeAccessMap).map(
