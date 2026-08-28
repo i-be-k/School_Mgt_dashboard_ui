@@ -21,6 +21,11 @@ const allKnownRoles = Array.from(new Set(Object.values(routeAccessMap).flat()));
 
 export default clerkMiddleware(async (auth, req) => {
   const currentPath = req.nextUrl.pathname;
+
+  if (currentPath === "/") {
+    return NextResponse.next();
+  }
+  
   const { sessionClaims } = await auth();
 
   // Safely extract the role from user metadata
